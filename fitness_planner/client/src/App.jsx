@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import RoutineForm from './components/RoutineForm'
 import Homepage from './views/Homepage'
+import EditRoutine from './components/EditRoutine'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/routineForm" element={<RoutineForm />} />
+        <Route path='/editRoutine/:id' element={<EditRoutine />} />
       </Routes>
     </>
   )

@@ -14,6 +14,19 @@ const DisplayRoutines = ({ routines, setRoutines }) => {
             })
     }, [])
 
+
+
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/deleteRoutine/${id}`)
+            .then((res) => {
+                console.log(res)
+                setRoutines(routines.filter((routine) => routine._id !== id))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     return (
         <div>
             <h2>Welcome to your Fitness Planner</h2>
@@ -33,11 +46,13 @@ const DisplayRoutines = ({ routines, setRoutines }) => {
                                     </div>
                                 ))
                             }
+                            < button> <Link to={`/editRoutine/${routine._id}`} >Edit Routine</Link></button>
+                            <button onClick={() => deleteHandler(routine._id)} >Delete</button>
                         </div>
                     ))
                 }
             </div>
-        </div>
+        </div >
     )
 }
 export default DisplayRoutines
