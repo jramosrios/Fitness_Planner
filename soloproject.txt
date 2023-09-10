@@ -1,0 +1,12 @@
+Fitness Planner
+  -Description: A webpage to store different gym routines that you create.
+  -Stack: MERN Stack
+  -Feature List: 
+-I would like to implement the CRUD method to add your own gym routines stored in by days or the name of your choosing to specify what you want to do on that day, even edit the routine to add or remove workouts..
+  -Backlog: 
+-Implement an api that rends workout for the muscle group you specify.
+-Log in and registration page to view users different routines but you can only edit your own routines
+-Make a blog where people comment on each routine for suggestions 
+
+
+GitHub repo link: https://github.com/jramosrios/Fitness_Planner/tree/main/fitness_planner
