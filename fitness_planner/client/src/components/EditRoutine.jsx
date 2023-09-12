@@ -37,8 +37,13 @@ const EditRoutine = (props) => {
 
 
     const addWorkoutField = () => {
+        const newWorkout = {
+            workoutName: '',
+            sets: '',
+            repetitions: ''
+        }
         setRoutine({
-            ...routine, workouts: [...routine.workouts, { workoutName: '', sets: '', repetitions: '' }]
+            ...routine, workouts: [...routine.workouts, newWorkout]
         })
     }
 
@@ -75,9 +80,11 @@ const EditRoutine = (props) => {
     }
 
     return (
-        <div>
-            <h2>Edit Routine</h2>
-            <Link to={'/'} >Back to home</Link>
+        <div className="wrapper">
+            <div className="top">
+                <h2>Edit Routine</h2>
+                <Link to={'/'} >Back to home</Link>
+            </div>
             <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor="routineName">Routine Name:</label>
@@ -93,8 +100,10 @@ const EditRoutine = (props) => {
                 <div className="workouts">
                     {routine.workouts.map((workout, idx) => (
                         <div key={idx}>
-                            <label htmlFor="workoutName">Workout: </label>
-                            <input id="workoutName" type="text" name='workoutName' value={workout.workoutName}
+                            <label htmlFor={`workoutName_${idx}`}>Workout: </label>
+                            <input id={`workoutName_${idx}`}
+                                type="text" name='workoutName'
+                                value={workout.workoutName}
                                 onChange={(e) => handleWorkoutChange(e, idx)} />
                             {
                                 errors.workoutName ?
@@ -102,8 +111,11 @@ const EditRoutine = (props) => {
                                     null
                             }
 
-                            <label htmlFor="sets">Sets: </label>
-                            <input id="sets" type="text" name="sets" value={workout.sets}
+                            <label htmlFor={`sets_${idx}`}>Sets: </label>
+                            <input id={`sets_${idx}`}
+                                type="text"
+                                name="sets"
+                                value={workout.sets}
                                 onChange={(e) => handleWorkoutChange(e, idx)} />
                             {
                                 errors.sets ?
@@ -111,8 +123,11 @@ const EditRoutine = (props) => {
                                     null
                             }
 
-                            <label htmlFor='repetitions'>Repetitions: </label>
-                            <input id="repetitions" type="text" name="repetitions" value={workout.repetitions}
+                            <label htmlFor={`repetitions_${idx}`}>Repetitions: </label>
+                            <input id={`repetitions_${idx}`}
+                                type="text"
+                                name="repetitions"
+                                value={workout.repetitions}
                                 onChange={(e) => handleWorkoutChange(e, idx)} />
                             {
                                 errors.repetitions ?
@@ -123,8 +138,8 @@ const EditRoutine = (props) => {
                         </div>
                     )
                     )}
-                    <button type="button" onClick={addWorkoutField}>Add workout</button>
                 </div>
+                <button type="button" onClick={addWorkoutField}>Add workout</button>
                 <button>Add Routine</button>
             </form>
         </div>

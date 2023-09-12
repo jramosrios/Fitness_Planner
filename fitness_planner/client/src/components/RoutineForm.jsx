@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-const RoutineForm = (routines, setRoutines) => {
+const RoutineForm = ({ routines, setRoutines }) => {
     const [routine, setRoutine] = useState({
         routineName: "",
         workouts: [
@@ -25,8 +25,13 @@ const RoutineForm = (routines, setRoutines) => {
 
 
     const addWorkoutField = () => {
+        const newWorkout = {
+            workoutName: '',
+            sets: '',
+            repetitions: ''
+        }
         setRoutine({
-            ...routine, workouts: [...routine.workouts, { workoutName: '', sets: '', repetitions: '' }]
+            ...routine, workouts: [...routine.workouts, newWorkout]
         })
     }
 
@@ -45,27 +50,35 @@ const RoutineForm = (routines, setRoutines) => {
         e.preventDefault();
         axios.post('http://localhost:8000/api/newRoutine', routine)
             .then((res) => {
-                console.log(res)
                 navigate('/')
-                setRoutine([...routines, res.data])
+                setRoutines([...routines, res.data])
+                console.log(res)
             })
             .catch((err) => {
                 setErrors(err.response.data.errors)
+                console.log(err)
             })
     }
 
 
 
     return (
-        <div>
-            <h2>Create your routine!</h2>
-            <Link to={'/'} >Back to home</Link>
+        <div className="wrapper">
+            <div className="top">
+                <h2>Create your routine!</h2>
+                <Link to={'/'} >Back to home</Link>
+            </div>
             <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor="routineName">Routine Name:</label>
-                    <input type="text" name="routineName" value={routine.routineName}
+                    <input
+                        type="text"
+                        name="routineName"
+                        id="routineName"
+                        value={routine.routineName}
                         onChange={changeHandler}
-                        placeholder='Leg Day' />
+                        placeholder='Leg Day'
+                        className="routine-input" />
                     {
                         errors.routineName ?
                             <p>{errors.routineName.message}</p> :
@@ -74,44 +87,52 @@ const RoutineForm = (routines, setRoutines) => {
                 </div>
                 <div className="workouts">
                     {routine.workouts.map((workout, idx) => (
-                        <div key={idx}>
-                            <label htmlFor="workoutName">Workout: </label>
-                            <input type="text" name='workoutName' value={workout.workoutName}
+                        <div key={idx} className="input">
+                            <label htmlFor={`workoutName_${idx}`}>Workout: </label>
+                            <input type="text"
+                                name='workoutName'
+                                id={`workoutName_${idx}`}
+                                value={workout.workoutName}
                                 onChange={(e) => handleWorkoutChange(e, idx)}
                                 placeholder='Leg Press' />
                             {
                                 errors.workoutName ?
-                                    <p>{errors.workouts.workoutName.message}</p> :
+                                    <p>{`errors.workouts.${idx}.workoutName.message`}</p> :
                                     null
                             }
-
-                            <label htmlFor="sets">Sets: </label>
-                            <input type="text" name="sets" value={workout.sets}
+                            < label htmlFor={`sets_${idx}`}>Sets: </label>
+                            <input type="text"
+                                name="sets"
+                                id={`sets_${idx}`}
+                                value={workout.sets}
                                 onChange={(e) => handleWorkoutChange(e, idx)}
                                 placeholder='3' />
                             {
                                 errors.sets ?
-                                    <p>{errors.workouts.sets.message}</p> :
+                                    <p>{errors.workouts[idx].sets.message}</p> :
                                     null
                             }
 
-                            <label htmlFor='repetitions'>Repetitions: </label>
-                            <input type="text" name="repetitions" value={workout.repetitions}
+                            <label htmlFor={`repetitions_${idx}`}>Repetitions: </label>
+                            <input type="text"
+                                name="repetitions"
+                                id={`repetitions_${idx}`}
+                                value={workout.repetitions}
                                 onChange={(e) => handleWorkoutChange(e, idx)}
                                 placeholder='10-12' />
                             {
                                 errors.repetitions ?
-                                    <p>{errors.repetitions.message}</p> :
+                                    <p>{errors.workouts[idx].repetitions.message}</p> :
                                     null
                             }
                         </div>
                     )
                     )}
-                    <button type="button" onClick={addWorkoutField}>Add workout</button>
-                </div>
+                </div >
+                <button type="button" onClick={addWorkoutField} >Add workout</button>
                 <button>Add Routine</button>
-            </form>
-        </div>
+            </form >
+        </div >
     )
 }
 export default RoutineForm

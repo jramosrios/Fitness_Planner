@@ -6,7 +6,7 @@ import { useState } from "react";
 const Homepage = (props) => {
     const [routines, setRoutines] = useState([])
     return (
-        <div>
+        <div className="wrapper">
             <DisplayRoutines routines={routines} setRoutines={setRoutines} />
         </div>
     )

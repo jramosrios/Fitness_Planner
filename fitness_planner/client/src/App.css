@@ -1,4 +1,222 @@
+:root {
+    --primary-bg-color: #1e272e;
+    --primary-text-color: #ffffff;
+    --secondary-bg-color: #485460;
+    --button-bg-color: #4287f5;
+    --button-hover-color: #1d5ea8;
+    --border-color: #2d72c4;
+}
+
 body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    background-color: #2d4059;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 950px;
+    background-color: var(--secondary-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.routine {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin: 10px 0;
+    background-color: var(--primary-bg-color);
+    padding: 10px;
+
+}
+
+.header {
+    cursor: pointer;
+    background-color: var(--button-bg-color);
+    color: var(--primary-text-color);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    margin: 10px 0;
+    flex-grow: 1;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+.header:hover {
+    background-color: var(--button-hover-color);
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--secondary-bg-color);
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.header.active {
+    background-color: var(--secondary-bg-color);
+}
+
+.routineName {
+    flex-grow: 1;
+    padding-right: 10px;
+    text-align: left;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.actions button {
+    margin-top: 5px;
+    width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+.content.active {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+
+.actions button a {
+    text-decoration: none;
+    color: var(--primary-text-color);
+    display: block;
+
+}
+
+.actions button:hover {
+    background-color: var(--secondary-bg-color);
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top a {
+    text-decoration: none;
+    background-color: var(--button-bg-color);
+    color: var(--primary-text-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+.top a:hover {
+    background-color: var(--button-hover-color);
+}
+
+/* form page add */
+
+a {
+    text-decoration: none;
+    color: var(--button-bg-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form {
+    margin-top: 20px;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+input[type='text'],
+.routine-input {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    text-align: center;
+}
+
+button {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: var(--secondary-bg-color) 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #455d7a;
+}
+
+.routineName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.workouts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.workout {
+    flex: 0 0 calc(33.33% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.input {
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.input label {
+    margin-right: 5px;
+}
+
+.input input[type="text"] {
+    width: 75%;
+}
+
+button[type='button'] {
+    flex-basis: calc(33.33% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
 }

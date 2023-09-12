@@ -27,27 +27,45 @@ const DisplayRoutines = ({ routines, setRoutines }) => {
             })
     }
 
+    //! Tracking the current open routine
+    const [openRoutineId, setOpenRoutineId] = useState(null)
+
+    //! Togles open and closing
+    const toggleAccordion = (routineId) => {
+        setOpenRoutineId((prevId) => (prevId === routineId ? null : routineId))
+    }
+
     return (
         <div>
-            <h2>Welcome to your Fitness Planner</h2>
-            <Link to={'/routineForm'}>Create your Gym Routine</Link>
+            <div className="top">
+                <h2>Welcome to your Fitness Planner</h2>
+                <Link to={'/routineForm'}>Create your Gym Routine</Link>
+            </div>
             <div className="allRoutines">
                 {
                     routines.map((routine) => (
-                        <div key={routine._id} >
-                            <h3>{routine.routineName}</h3>
-
-                            {
-                                routine.workouts.map((workout) => (
-                                    <div key={workout._id} >
-                                        <p>{workout.workoutName}</p>
-                                        <p>{workout.sets}</p>
-                                        <p>{workout.repetitions}</p>
-                                    </div>
-                                ))
-                            }
-                            < button> <Link to={`/editRoutine/${routine._id}`} >Edit Routine</Link></button>
-                            <button onClick={() => deleteHandler(routine._id)} >Delete</button>
+                        <div key={routine._id} className={`routine ${openRoutineId === routine._id ? 'active' : ''}`} >
+                            <div className={`header ${openRoutineId === routine._id ? 'active' : ''}`}
+                                onClick={() => toggleAccordion(routine._id)}>
+                                <div className="routineName">
+                                    <h3>{routine.routineName}</h3>
+                                </div>
+                                <div className="actions">
+                                    < button onClick={(e) => e.stopPropagation()} > <Link to={`/editRoutine/${routine._id}`} >Edit Routine</Link></button>
+                                    <button onClick={() => deleteHandler(routine._id)} >Delete</button>
+                                </div>
+                            </div>
+                            <div className={`content ${openRoutineId === routine._id ? 'active' : ''}`}>
+                                {
+                                    routine.workouts.map((workout) => (
+                                        <div key={workout._id} className='workout'>
+                                            <p>Workout: {workout.workoutName}</p>
+                                            <p>Sets: {workout.sets}</p>
+                                            <p>Repetitions: {workout.repetitions}</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
                     ))
                 }
