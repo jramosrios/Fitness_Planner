@@ -3,8 +3,8 @@ import axios from 'axios';
 import RoutineForm from "../components/RoutineForm";
 import DisplayRoutines from "../components/DisplayRoutines";
 import { useState } from "react";
-const Homepage = (props) => {
-    const [routines, setRoutines] = useState([])
+const Homepage = ({ routines, setRoutines }) => {
+
     return (
         <div className="wrapper">
             <DisplayRoutines routines={routines} setRoutines={setRoutines} />

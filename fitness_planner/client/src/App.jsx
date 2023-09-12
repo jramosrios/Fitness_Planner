@@ -6,14 +6,14 @@ import Homepage from './views/Homepage'
 import EditRoutine from './components/EditRoutine'
 
 function App() {
-
+  const [routines, setRoutines] = useState([])
 
   return (
     <>
       <h1>Fitness Planner</h1>
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/routineForm" element={<RoutineForm />} />
+        <Route path="/" element={<Homepage routines={routines} setRoutines={setRoutines} />} />
+        <Route path="/routineForm" element={<RoutineForm routines={routines} setRoutines={setRoutines} />} />
         <Route path='/editRoutine/:id' element={<EditRoutine />} />
       </Routes>
     </>

@@ -11,17 +11,17 @@ const RoutineSchema = new mongoose.Schema({
             workoutName: {
                 type: String,
                 required: [true, 'You must put a workout name'],
-                minlength: [3, 'The workout name must be at least 3 characters long']
+                minLength: [3, 'The workout name must be at least 3 characters long']
             },
             sets: {
                 type: String,
                 required: [true, 'You must put  how many sets you are going to do'],
-                minlength: [1, 'The sets must be at least 1 characters long']
+                minLength: [1, 'The sets must be at least 1 characters long']
             },
             repetitions: {
                 type: String,
                 required: [true, 'You must put how many repetitions are going to be made'],
-                minlength: [1, 'The repetitions must be at least 1 characters long']
+                minLength: [1, 'The repetitions must be at least 1 characters long']
             }
         }
     ]

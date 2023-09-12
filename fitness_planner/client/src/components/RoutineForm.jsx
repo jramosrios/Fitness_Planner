@@ -50,11 +50,13 @@ const RoutineForm = ({ routines, setRoutines }) => {
         e.preventDefault();
         axios.post('http://localhost:8000/api/newRoutine', routine)
             .then((res) => {
+                console.log(res)
                 navigate('/')
                 setRoutines([...routines, res.data])
                 console.log(res)
             })
             .catch((err) => {
+                console.log(err, "This is your error you are looking for")
                 setErrors(err.response.data.errors)
                 console.log(err.response.data.errors)
                 console.log(err.response.data.errors["workouts.0.repetitions"])
@@ -87,7 +89,7 @@ const RoutineForm = ({ routines, setRoutines }) => {
                     }
                 </div>
                 <div className="workouts">
-                    {routine.workouts.map((workout, idx) => (
+                    {routine?.workouts.map((workout, idx) => (
                         <div key={idx} className="input">
                             <label htmlFor={`workoutName_${idx}`}>Workout: </label>
                             <input type="text"
