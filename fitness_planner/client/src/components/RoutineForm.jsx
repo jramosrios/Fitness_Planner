@@ -56,7 +56,8 @@ const RoutineForm = ({ routines, setRoutines }) => {
             })
             .catch((err) => {
                 setErrors(err.response.data.errors)
-                console.log(err)
+                console.log(err.response.data.errors)
+                console.log(err.response.data.errors["workouts.0.repetitions"])
             })
     }
 
@@ -96,8 +97,8 @@ const RoutineForm = ({ routines, setRoutines }) => {
                                 onChange={(e) => handleWorkoutChange(e, idx)}
                                 placeholder='Leg Press' />
                             {
-                                errors.workoutName ?
-                                    <p>{`errors.workouts.${idx}.workoutName.message`}</p> :
+                                errors[`workouts.${idx}.workoutName`] ?
+                                    <p>{errors[`workouts.${idx}.workoutName`].message}</p> :
                                     null
                             }
                             < label htmlFor={`sets_${idx}`}>Sets: </label>
@@ -108,8 +109,8 @@ const RoutineForm = ({ routines, setRoutines }) => {
                                 onChange={(e) => handleWorkoutChange(e, idx)}
                                 placeholder='3' />
                             {
-                                errors.sets ?
-                                    <p>{errors.workouts[idx].sets.message}</p> :
+                                errors[`workouts.${idx}.sets`] ?
+                                    <p>{errors[`workouts.${idx}.sets`].message}</p> :
                                     null
                             }
 
@@ -121,8 +122,8 @@ const RoutineForm = ({ routines, setRoutines }) => {
                                 onChange={(e) => handleWorkoutChange(e, idx)}
                                 placeholder='10-12' />
                             {
-                                errors.repetitions ?
-                                    <p>{errors.workouts[idx].repetitions.message}</p> :
+                                errors[`workouts.${idx}.repetitions`] ?
+                                    <p>{errors[`workouts.${idx}.repetitions`].message}</p> :
                                     null
                             }
                         </div>

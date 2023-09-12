@@ -106,8 +106,8 @@ const EditRoutine = (props) => {
                                 value={workout.workoutName}
                                 onChange={(e) => handleWorkoutChange(e, idx)} />
                             {
-                                errors.workoutName ?
-                                    <p>{errors.workouts.workoutName.message}</p> :
+                                errors[`workouts.${idx}.workoutName`] ?
+                                    <p>{errors[`workouts.${idx}.workoutName`].message}</p> :
                                     null
                             }
 
@@ -118,8 +118,8 @@ const EditRoutine = (props) => {
                                 value={workout.sets}
                                 onChange={(e) => handleWorkoutChange(e, idx)} />
                             {
-                                errors.sets ?
-                                    <p>{errors.workouts.sets.message}</p> :
+                                errors[`workouts.${idx}.sets`] ?
+                                    <p>{errors[`workouts.${idx}.sets`].message}</p> :
                                     null
                             }
 
@@ -130,8 +130,8 @@ const EditRoutine = (props) => {
                                 value={workout.repetitions}
                                 onChange={(e) => handleWorkoutChange(e, idx)} />
                             {
-                                errors.repetitions ?
-                                    <p>{errors.repetitions.message}</p> :
+                                errors[`workouts.${idx}.repetitions`] ?
+                                    <p>{errors[`workouts.${idx}.repetitions`].message}</p> :
                                     null
                             }
                             <button type="button" onClick={() => removeWorkout(idx)} >Remove</button>
